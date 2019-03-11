@@ -1,1 +1,1 @@
-include ':genericadapter'
+include ':app', ':genericadapter'
