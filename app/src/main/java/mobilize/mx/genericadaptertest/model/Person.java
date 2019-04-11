@@ -12,8 +12,8 @@ public class Person {
         Name = name;
     }
 
-    public int getAge() {
-        return Age;
+    public String getAge() {
+        return ""+Age;
     }
 
     public void setAge(int age) {

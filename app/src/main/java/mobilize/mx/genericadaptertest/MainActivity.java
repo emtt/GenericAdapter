@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +23,7 @@ public class MainActivity extends AppCompatActivity implements ItemListener {
     private Adapter adapterPersons;
     private RecyclerView rvPosts;
     private RecyclerView rvPersons;
+    private Button btnChange;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +36,7 @@ public class MainActivity extends AppCompatActivity implements ItemListener {
     private void setUpRecycler() {
         rvPosts = findViewById(R.id.rvPosts);
         rvPersons = findViewById(R.id.rvPersons);
-
+        btnChange = findViewById(R.id.btnChange);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         rvPosts.setLayoutManager(layoutManager);
 
@@ -50,6 +53,18 @@ public class MainActivity extends AppCompatActivity implements ItemListener {
          */
         adapterPersons = new Adapter<>(personList, R.layout.item_person, this, BR.person);
         rvPersons.setAdapter(adapterPersons);
+        /*
+        Change on runtime the layout for the adapter
+         */
+        btnChange.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                adapterPersons.setLayoutId(R.layout.item_person_other_layout);
+                adapterPersons.notifyDataSetChanged();
+            }
+        });
+
+
 
     }
 
