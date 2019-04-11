@@ -48,6 +48,10 @@ public class Adapter<T> extends RecyclerView.Adapter<Adapter.ViewHolder> {
         }
     }
 
+    public void setLayoutId(int layoutId) {
+        this.layoutId = layoutId;
+    }
+
     @Override
     public int getItemViewType(int position) {
         return layoutId;
