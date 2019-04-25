@@ -6,10 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import java.util.List;
-
-
 /**
  * <pre>
  *     author: Efra Morales - emoralest@gmail.com - mobilize.mx
@@ -20,15 +17,14 @@ import java.util.List;
  *             third param is BR Class
  * </pre>
  */
-
-public class Adapter<T> extends RecyclerView.Adapter<Adapter.ViewHolder> {
+public class MobilizeAdapter <T> extends RecyclerView.Adapter<MobilizeAdapter.ViewHolder> {
 
     private List<? extends T> list;
     private int layoutId;
     ItemListener itemListener;
     int brModel;
 
-    public Adapter(List<? extends T> list, int layoutId, ItemListener itemListener, int dataModel) {
+    public MobilizeAdapter(List<? extends T> list, int layoutId, ItemListener itemListener, int dataModel) {
         this.list = list;
         this.layoutId = layoutId;
         this.itemListener = itemListener;
@@ -58,13 +54,13 @@ public class Adapter<T> extends RecyclerView.Adapter<Adapter.ViewHolder> {
     }
 
     @Override
-    public Adapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public MobilizeAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         ViewDataBinding bind = DataBindingUtil.bind(LayoutInflater.from(parent.getContext()).inflate(viewType, parent, false));
-        return new ViewHolder<>(bind);
+        return new MobilizeAdapter.ViewHolder<>(bind);
     }
 
     @Override
-    public void onBindViewHolder(Adapter.ViewHolder holder, final int position) {
+    public void onBindViewHolder(MobilizeAdapter.ViewHolder holder, final int position) {
         final T model = list.get(position);
         holder.getBinding().setVariable(brModel, model);
         holder.getBinding().executePendingBindings();

@@ -113,11 +113,12 @@ public class MainActivity extends AppCompatActivity implements ItemListener {
      * @param model
      */
     @Override
-    public void onClick(Object model) {
+    public void onClick(Object model, View v, int position) {
         /**
          * What kind of model expect you receive in this method?
          * According to the type of model you're passing to the adapter it's the type that you receiving here:
          */
+        Log.d("MainActivity","Position:" + position);
         if (model instanceof Posts) {
             Log.d("MainActivity", "Post: " + ((Posts) model).id + " - " + ((Posts) model).title);
         } else if (model instanceof Person) {
