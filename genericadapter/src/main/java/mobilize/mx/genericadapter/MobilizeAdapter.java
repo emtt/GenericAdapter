@@ -74,7 +74,7 @@ public class MobilizeAdapter <T> extends RecyclerView.Adapter<MobilizeAdapter.Vi
                 itemListener.onClick(model, v, position);
             }
         });
-
+        holder.itemView.setLongClickable(true);
     }
 
     @Override

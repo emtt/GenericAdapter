@@ -5,14 +5,19 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.ContextMenu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import mobilize.mx.genericadapter.Adapter;
 import mobilize.mx.genericadapter.ItemListener;
+import mobilize.mx.genericadapter.MobilizeAdapter;
 import mobilize.mx.genericadaptertest.model.Person;
 import mobilize.mx.genericadaptertest.model.Posts;
 
@@ -20,7 +25,7 @@ public class MainActivity extends AppCompatActivity implements ItemListener {
     private List<Posts> postsList = new ArrayList<>();
     private List<Person> personList = new ArrayList<>();
     private Adapter adapter;
-    private Adapter adapterPersons;
+    private MobilizeAdapter adapterPersons;
     private RecyclerView rvPosts;
     private RecyclerView rvPersons;
     private Button btnChange;
@@ -36,6 +41,7 @@ public class MainActivity extends AppCompatActivity implements ItemListener {
     private void setUpRecycler() {
         rvPosts = findViewById(R.id.rvPosts);
         rvPersons = findViewById(R.id.rvPersons);
+        registerForContextMenu(rvPersons);
         btnChange = findViewById(R.id.btnChange);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         rvPosts.setLayoutManager(layoutManager);
@@ -51,7 +57,7 @@ public class MainActivity extends AppCompatActivity implements ItemListener {
         /**
          * or Persons
          */
-        adapterPersons = new Adapter<>(personList, R.layout.item_person, this, BR.person);
+        adapterPersons = new MobilizeAdapter(personList, R.layout.item_person, this, BR.person);
         rvPersons.setAdapter(adapterPersons);
         /*
         Change on runtime the layout for the adapter
@@ -73,6 +79,23 @@ public class MainActivity extends AppCompatActivity implements ItemListener {
         populatePosts();
     }
 
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+
+        // Inflate Menu from xml resource
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.context_menu, menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+
+        Toast.makeText(this, " User selected something ", Toast.LENGTH_LONG).show();
+
+
+        return false;
+    }
     private void populatePersons() {
         Person person1 = new Person();
         person1.setAge(18);
